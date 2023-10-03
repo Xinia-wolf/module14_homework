@@ -1,3 +1,8 @@
+/* Задание 1
+Вам дана заготовка и результат, который вы должны получить. 
+Ваша задача — написать код, который будет преобразовывать XML в JS-объект и выводить его в консоль.
+*/
+
 /* Этап 1. Подготовка данных */
 
 // Создание экземпляра класса DOMParser. Он позволит нам парсить XML
@@ -35,21 +40,20 @@ const xmlDOM = parser.parseFromString(xmlString, "text/xml");
 // Получение всех DOM-нод
 const listNode = xmlDOM.querySelector("list");
 const studentNodes = [...listNode.querySelectorAll("student")];
-const list = [];
-studentNodes.forEach( studentNode => {
+const list = studentNodes.map(studentNode => {
   const nameNode = studentNode.querySelector("name");
   const langAttr = nameNode.getAttribute('lang');
   const firstNode = nameNode.querySelector("first");
   const secondNode = nameNode.querySelector("second");
   const ageNode = studentNode.querySelector("age");
   const profNode = studentNode.querySelector("prof");
-  list.push({
+  return{
     prof: profNode.textContent,
     first: firstNode.textContent,
     second: secondNode.textContent,
     lang: langAttr,
     age: Number(ageNode.textContent),
-  });
+  };
 });
 
 console.log('list', list);
